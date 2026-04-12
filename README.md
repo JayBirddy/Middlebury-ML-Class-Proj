@@ -33,5 +33,8 @@ Partial success
 # Risk Statement(s)
 
 # Ethics Statement(s)
-
+1. We aim to reduce preventable hospital readmissions and improve patient outcomes by enabling targeted, timely clinical interventions.
+2. Patients, clinicians, and healthcare systems could benefit through improved care, better resource allocation, and reduced costs.
+3. Underrepresented populations may face less accurate predictions, while some patients may be unnecessarily treated or overlooked due to model errors or bias.
+4. The world will be better if identifying high-risk patients actually leads clinicians to take effective actions that reduce readmissions and if the model is used appropriately without reinforcing existing biases.
 # Tentative Timeline
