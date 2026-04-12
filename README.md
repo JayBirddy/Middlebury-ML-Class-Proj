@@ -2,8 +2,8 @@
 Predict hospital readmission rate using ML techniques
 
 # Group Members
-Jayden Chen
-Evan Lin
+Jayden Chen,
+Evan Lin,
 Jonathan Mota
 
 # Abstract
