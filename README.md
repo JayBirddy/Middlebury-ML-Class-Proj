@@ -31,6 +31,8 @@ Partial success
 # What We Will Learn
 
 # Risk Statement(s)
+The predictive patterns for 30 day readmissions may be weak or not particularly well captured in the dataset, limiting the model’s ability to achieve meaningful precision and recall for clinical use. Additionally, the complexity of preprocessing clinical data and engineering useful features may require more time and computational resources than anticipated, possibly constraining model development and evaluation.
+
 
 # Ethics Statement(s)
 1. We aim to reduce preventable hospital readmissions and improve patient outcomes by enabling targeted, timely clinical interventions.
