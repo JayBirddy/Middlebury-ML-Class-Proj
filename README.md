@@ -29,6 +29,7 @@ Partial success
 # Resources Required
 
 # What We Will Learn
+- Evan: I hope to deepen my understanding of machine learning for healthcare applications, especially how to develop and evaluate predictive models using real clinical data, and to do so effectively by making sure that the work is done in a collaborative setting with good communication.
 
 # Risk Statement(s)
 The predictive patterns for 30 day readmissions may be weak or not particularly well captured in the dataset, limiting the model’s ability to achieve meaningful precision and recall for clinical use. Additionally, the complexity of preprocessing clinical data and engineering useful features may require more time and computational resources than anticipated, possibly constraining model development and evaluation.
