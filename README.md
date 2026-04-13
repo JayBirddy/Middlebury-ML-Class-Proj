@@ -25,17 +25,19 @@ In the current field of medicine, there are many exterior factors that can play 
 - An essay discussing ethic implications of our project. May include an ethics matrix and moral/legal discussions
 
 Full success
-- Above stated deliverables as well as a formalized app with a working interaction no matter how primitive.
+Above stated deliverables as well a a trained model that produces clinically meaningful sensitivity and precision on held-out test data. Model performance would be disaggregated across demographic subgroups with no significant disparity.
 
 Partial success
-- 2-3 of the above states deliverables.
+Some deliverables are completed and a working model would be built and evaluated even if performance falls short of clinical thresholds. It would include honest documentation of dataset limitations and modeling constraints, forming a foundation for future work.
 
 # Resources Required
-Data will be based on MIMIC-III Clinical Database: a deidentified, publicly available database health records dataset based from The Beth Israel Deaconess Medical Center (BIDMC) 
+-cloud GPU computing power
+- Dataset: Data will be based on MIMIC-III Clinical Database: a deidentified, publicly available database health records dataset based from The Beth Israel Deaconess Medical Center (BIDMC) 
+- Libraries: scikit-learn, pandas, numpy, matplotlib, seaborn
+- Literature: Access to prior work on readmission prediction and fairness-aware ML in healthcare via Google Scholar or JSTOR
 
-Most likely cloud GPU computing power
 
-student accessible resources
+
 
 
 # What We Will Learn
@@ -55,16 +57,16 @@ The predictive patterns for 30 day readmissions may be weak or not particularly 
 
 # Tentative Timeline
 Sprint 1
-- Feasibility discussion, data exploration, model decision-making discussion
+- Feasibility discussion, exploratory analysis (class balance, missing values, feature distributions), model decision-making discussion
 
 Sprint 2 (tentative check-in)
-- Data formatting pipeline, data exploration and influence into decision-making
+- Data formatting pipeline, data exploration and influence into decision-making, simple logistic regression baseline
 
 Sprint 3
-- Model prototype
+- Model prototype 
 
 Sprint 4
-- Model adjustment
+- Model adjustment, threshold calibration explored for sensitivity/precision tradeoff
 
  Sprint 5 (tentative final presentations)
- - Final write-up
+ - Final write-up, notebook polished, Ethics essay complete, presentation prepared.
