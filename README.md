@@ -11,11 +11,13 @@ within a 30 day period?" We will be attempting to solve this problem by building
 patient and prognosis details (historically and upon discharge) to output a probability per patient. Evaluation
 will be based on a focus for "clinical intervention" and so we will be focusing on sensitivity and precision/PPV as
 the main evaluation tools. Further nuance will be need to be gauged and specified as the fundamental questions posed 
-by the metrics above are: "Are we actually catching the patients who will be readmitted?" and "Are the patients flagged 
+by the metrics above are: "Is the model actually catching the patients who will be readmitted?" and "Are the flagged patients  
 worth the clinical team's time?" respectively and they are in tension will each other. 
 
 # Motivation and Question
 We have public health data for which predictive models would help us give better decisions and resource management tasks.
+
+In the current feild of medecine, there are many exterior factors that can play into a patient's discharge. While there isn't much we can do about a patient's cooperation, a hospital's funding, or Insurance-related factors, what we can do is try to implement a system that promotes precautionary and preventive measure for many patients. 
 
 # Planned Deliverables
 - Python package containing code for algorithms and analysis as well as documentation.
@@ -30,6 +32,7 @@ Partial success
 
 # What We Will Learn
 - Evan: I hope to deepen my understanding of machine learning for healthcare applications, especially how to develop and evaluate predictive models using real clinical data, and to do so effectively by making sure that the work is done in a collaborative setting with good communication.
+- Jonathan: I would like to have a firsthand experience dealing with data and personal biases. In recent months, I have taken a look at many models that are responsible for making decisions of the life of another human. This being in the same category as thos offers an exclusive oppotunity to reflect on addressing patterns with my team. 
 
 # Risk Statement(s)
 The predictive patterns for 30 day readmissions may be weak or not particularly well captured in the dataset, limiting the model’s ability to achieve meaningful precision and recall for clinical use. Additionally, the complexity of preprocessing clinical data and engineering useful features may require more time and computational resources than anticipated, possibly constraining model development and evaluation.
@@ -40,4 +43,5 @@ The predictive patterns for 30 day readmissions may be weak or not particularly 
 2. Patients, clinicians, and healthcare systems could benefit through improved care, better resource allocation, and reduced costs.
 3. Underrepresented populations may face less accurate predictions, while some patients may be unnecessarily treated or overlooked due to model errors or bias.
 4. The world will be better if identifying high-risk patients actually leads clinicians to take effective actions that reduce readmissions and if the model is used appropriately without reinforcing existing biases.
+5. 
 # Tentative Timeline
