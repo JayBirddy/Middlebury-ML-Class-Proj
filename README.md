@@ -11,8 +11,8 @@ within a 30 day period?" We will be attempting to solve this problem by building
 patient and prognosis details (historically and upon discharge) to output a probability per patient. Evaluation
 will be based on a focus for "clinical intervention" and so we will be focusing on sensitivity and precision/PPV as
 the main evaluation tools. Further nuance will be need to be gauged and specified as the fundamental questions posed 
-by the metrics above are: "Is the model actually catching the patients who will be readmitted?" and "Are the flagged patients  
-worth the clinical team's time?" respectively and they are in tension will each other. 
+by the metrics above are: "Is the model actually catching the patients who will be readmitted?" and "Are the flagged 
+patients worth the clinical team's time?" respectively and they are in tension will each other. 
 
 # Motivation and Question
 We have public health data for which predictive models would help us give better decisions and resource management tasks.
