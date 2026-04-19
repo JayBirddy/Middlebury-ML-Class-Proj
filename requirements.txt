@@ -1,0 +1,6 @@
+ucimlrepo
+torch
+scikit-learn
+pandas
+numpy
+matplotlib
