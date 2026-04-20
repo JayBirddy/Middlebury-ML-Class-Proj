@@ -82,6 +82,23 @@ class StochasticLogisticRegression(nn.Module):
     def forward(self, x):
         return self.linear(x)   
 
+class EarlyStopping:
+    def __init__(self, patience=5, min_delta=1e-4):
+        self.patience   = patience
+        self.min_delta  = min_delta
+        self.best_loss  = float('inf')
+        self.counter    = 0
+        self.should_stop = False
+
+    def step(self, val_loss):
+        if val_loss < self.best_loss - self.min_delta:
+            self.best_loss = val_loss
+            self.counter   = 0
+        else:
+            self.counter += 1
+            if self.counter >= self.patience:
+                self.should_stop = True
+
 def train(X_train, y_train,
           pos_weight_val,
           batch_size=256,
@@ -127,6 +144,53 @@ def train(X_train, y_train,
             print(f"  Epoch {epoch+1:3d}/{epochs} — loss: {avg_loss:.4f}")
 
     return model, history
+
+def train(X_train, y_train, pos_weight_val, batch_size=256, epochs=50, lr=1e-3, patience=5):
+
+    # hold out 10% as a validation set for early stopping
+    split = int(len(X_train) * 0.9)
+    X_tr, X_val = X_train[:split], X_train[split:]
+    y_tr, y_val = y_train[:split], y_train[split:]
+
+    X_t = torch.tensor(X_tr, dtype=torch.float32)
+    y_t = torch.tensor(y_tr, dtype=torch.float32).unsqueeze(1)
+    X_v = torch.tensor(X_val, dtype=torch.float32)
+    y_v = torch.tensor(y_val, dtype=torch.float32).unsqueeze(1)
+
+    loader    = DataLoader(TensorDataset(X_t, y_t), batch_size=batch_size, shuffle=True)
+    model     = StochasticLogisticRegression(X_train.shape[1])
+    criterion = nn.BCEWithLogitsLoss(pos_weight=torch.tensor([pos_weight_val]))
+    optimizer = torch.optim.Adam(model.parameters(), lr=lr)
+    stopper   = EarlyStopping(patience=patience)
+    history   = []
+
+#   for epoch in range(epochs):
+#        model.train()
+#        epoch_loss = 0.0
+#        for X_batch, y_batch in loader:
+#            optimizer.zero_grad()
+#            loss = criterion(model(X_batch), y_batch)
+#            loss.backward()
+#            optimizer.step()
+#            epoch_loss += loss.item()
+
+#        avg_loss = epoch_loss / len(loader)
+#        history.append(avg_loss)
+
+        # --- early stopping check on validation loss ---
+#        model.eval()
+#        with torch.no_grad():
+#            val_loss = criterion(model(X_v), y_v).item()
+#        stopper.step(val_loss)
+#
+#        if (epoch + 1) % 10 == 0:
+#            print(f"  Epoch {epoch+1:3d}/{epochs} — train loss: {avg_loss:.4f} | val loss: {val_loss:.4f}")
+#
+#        if stopper.should_stop:
+#            print(f"\n  Early stopping triggered at epoch {epoch+1} (patience={patience})")
+#           break
+#
+ #   return model, history
 
 def evaluate(model, X_test, y_test, threshold=0.5):
     model.eval()
