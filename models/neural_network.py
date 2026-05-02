@@ -1,22 +1,30 @@
-import pandas as pd
-import torch
-from matplotlib import pyplot as plt
-import seaborn as sns
+import torch.nn as nn
 
-url = "data/diabetic_data.csv"
-df = pd.read_csv(url)
+# standalone model architecture definition for loading weights and running inference in the auditor.
+class ReadmissionMLP(nn.Module):
+    """
+    3-hidden-layer MLP for binary readmission prediction.
+    """
+    def __init__(self, input_dim):
+        super().__init__()
+        self.net = nn.Sequential(
+            nn.Linear(input_dim, 128),
+            nn.BatchNorm1d(128),
+            nn.ReLU(),
+            nn.Dropout(0.3),
 
-# print(df.head(5))
+            nn.Linear(128, 64),
+            nn.BatchNorm1d(64),
+            nn.ReLU(),
+            nn.Dropout(0.3),
 
-# Drop or fill missing values
-df.replace('?', pd.NA, inplace=True)
-df.dropna(inplace=True)  
+            nn.Linear(64, 32),
+            nn.BatchNorm1d(32),
+            nn.ReLU(),
+            nn.Dropout(0.2),
 
-# Encode categorical columns
-from sklearn.preprocessing import LabelEncoder
-le = LabelEncoder()
-for col in df.select_dtypes(include='object').columns:
-    df[col] = le.fit_transform(df[col].astype(str))
+            nn.Linear(32, 1),
+        )
 
-X = df.drop('readmitted', columns=1)  # defining
-y = df['readmitted']
+    def forward(self, x):
+        return self.net(x).squeeze(1)
