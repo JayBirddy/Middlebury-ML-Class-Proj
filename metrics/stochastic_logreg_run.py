@@ -8,16 +8,18 @@ import torch.nn as nn
 from torch.utils.data import DataLoader, TensorDataset
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import confusion_matrix, roc_auc_score
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, roc_auc_score
 import matplotlib.pyplot as plt
 from ucimlrepo import fetch_ucirepo
 import pickle
+import pandas as pd
 
 from models.stochastic_logreg import StochasticLogisticRegression
 
 # set up output directory for training artifacts to be saved
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 output_dir   = os.path.join(PROJECT_ROOT, "outputs", "sto_logreg")
+graph_dir    = os.path.join(PROJECT_ROOT, "graphs", "sto_logreg")
 os.makedirs(output_dir, exist_ok=True)
 
 def load_data():
@@ -63,7 +65,6 @@ def load_data():
     X[num_cols] = X[num_cols].fillna(X[num_cols].median())
     X[cat_cols] = X[cat_cols].fillna(X[cat_cols].mode().iloc[0])
 
-    import pandas as pd
     X = pd.get_dummies(X, columns=list(cat_cols), drop_first=True)
 
     print(f"Final dataset: {X.shape[0]} rows, {X.shape[1]} features")
@@ -159,6 +160,14 @@ def evaluate(model, X_test, y_test, threshold=0.5):
     preds = (probs >= threshold).astype(int)
     tn, fp, fn, tp = confusion_matrix(y_test, preds, labels=[0, 1]).ravel()
 
+    cm_disp = confusion_matrix(y_test, preds, labels=[0, 1])
+    disp = ConfusionMatrixDisplay(confusion_matrix=cm_disp, display_labels=['Readmitted', 'Not Readmitted'])
+    disp.plot(cmap=plt.cm.Blues)
+    plt.title("Confusion Matrix Plot")
+    plt.savefig(os.path.join(graph_dir, "confusion_matrix.png"), dpi=180)
+    plt.show()
+    print("Saved: confusion_matrix.png")
+
     sensitivity = tp / (tp + fn) if (tp + fn) > 0 else 0
     ppv         = tp / (tp + fp) if (tp + fp) > 0 else 0
     auc         = roc_auc_score(y_test, probs)
@@ -181,7 +190,7 @@ def plot_loss(history):
     plt.ylabel('Avg batch loss')
     plt.title('Stochastic LogReg + Adam — training loss')
     plt.tight_layout()
-    plt.savefig(os.path.join(output_dir, "training_loss.png"), dpi=150)
+    plt.savefig(os.path.join(graph_dir, "training_loss.png"), dpi=150)
     plt.show()
     print("Saved: training_loss.png")
 
@@ -210,7 +219,7 @@ def threshold_sweep(probs, y_test):
     plt.title('Stochastic LogReg + Adam — Sensitivity vs PPV')
     plt.legend()
     plt.tight_layout()
-    plt.savefig(os.path.join(output_dir, "threshold_sweep.png"), dpi=150)
+    plt.savefig(os.path.join(graph_dir, "threshold_sweep.png"), dpi=150)
     plt.show()
     print("Saved: threshold_sweep.png")
 
@@ -237,7 +246,6 @@ if __name__ == '__main__':
     plot_loss(history)
     threshold_sweep(probs, y_test)
 
-    pickle.dump(model, open("model.pkl", "wb"))
     with open(os.path.join(output_dir, "scaler.pkl"), "wb") as f:
         pickle.dump(scaler, f)
     print("Saved: scaler.pkl")
@@ -246,4 +254,6 @@ if __name__ == '__main__':
         pickle.dump(feature_cols, f)
     print(f"Saved: feature_cols.pkl  ({len(feature_cols)} features)")
 
+    with open(os.path.join(output_dir, "model.pkl"), "wb") as f:
+        pickle.dump(model, f)
     print("\nModel saved")

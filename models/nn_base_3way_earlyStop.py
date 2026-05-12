@@ -29,12 +29,19 @@ y = (df["readmitted"] != 0).astype(int).values
 
 scaler = StandardScaler()
 X = scaler.fit_transform(X)
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42, stratify=y
+
+# ── Three-way split: 70% train, 15% val, 15% test ──────────────────────────
+X_train, X_temp, y_train, y_temp = train_test_split(
+    X, y, test_size=0.3, random_state=42, stratify=y
+)
+X_val, X_test, y_val, y_test = train_test_split(
+    X_temp, y_temp, test_size=0.5, random_state=42, stratify=y_temp
 )
 
 X_train_t = torch.tensor(X_train, dtype=torch.float32)
 y_train_t = torch.tensor(y_train, dtype=torch.float32).unsqueeze(1)
+X_val_t   = torch.tensor(X_val,   dtype=torch.float32)
+y_val_t   = torch.tensor(y_val,   dtype=torch.float32).unsqueeze(1)
 X_test_t  = torch.tensor(X_test,  dtype=torch.float32)
 y_test_t  = torch.tensor(y_test,  dtype=torch.float32).unsqueeze(1)
 
@@ -58,10 +65,14 @@ model = nn.Sequential(
 
 criterion = nn.BCEWithLogitsLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-4)
-scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.5)
+scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.3)
 
-EPOCHS = 30
+EPOCHS   = 30
+PATIENCE = 5
+
 train_losses, val_losses, val_accs = [], [], []
+best_val_loss = float("inf")
+strikes = 0
 
 for epoch in range(EPOCHS):
     model.train()
@@ -75,12 +86,13 @@ for epoch in range(EPOCHS):
 
     scheduler.step()
 
+    # ── Evaluate on validation set (NOT test) ──────────────────────────────
     model.eval()
     with torch.no_grad():
-        logits_val = model(X_test_t)
-        val_loss   = criterion(logits_val, y_test_t).item()
+        logits_val = model(X_val_t)
+        val_loss   = criterion(logits_val, y_val_t).item()
         preds_val  = (torch.sigmoid(logits_val) >= 0.5).float()
-        acc        = (preds_val == y_test_t).float().mean().item()
+        acc        = (preds_val == y_val_t).float().mean().item()
 
     train_losses.append(np.mean(batch_losses))
     val_losses.append(val_loss)
@@ -94,6 +106,21 @@ for epoch in range(EPOCHS):
             f"Val Acc: {acc:.4f}"
         )
 
+    # ── Early stopping on val loss ─────────────────────────────────────────
+    if val_loss < best_val_loss:
+        best_val_loss = val_loss
+        torch.save(model.state_dict(), "best_model.pth")
+        strikes = 0
+    else:
+        strikes += 1
+        if strikes >= PATIENCE:
+            print(f"\nEarly stopping at epoch {epoch+1} (patience={PATIENCE})")
+            break
+
+# Restore the best checkpoint before final evaluation
+model.load_state_dict(torch.load("best_model.pth"))
+
+# ── Final evaluation on held-out test set ─────────────────────────────────
 model.eval()
 with torch.no_grad():
     probs = torch.sigmoid(model(X_test_t)).numpy().flatten()
@@ -107,6 +134,7 @@ print(f"ROC-AUC Score: {auc:.4f}")
 
 torch.save(model.state_dict(), "neural_net_cci.pth")
 
+# ── Plots ──────────────────────────────────────────────────────────────────
 fig, axes = plt.subplots(1, 3, figsize=(16, 4))
 
 axes[0].plot(train_losses, label="Train Loss")

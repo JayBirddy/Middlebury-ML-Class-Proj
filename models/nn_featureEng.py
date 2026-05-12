@@ -18,7 +18,33 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import roc_auc_score
 
-from models.neural_network import ReadmissionMLP
+class ReadmissionMLP(nn.Module):
+    """
+    3-hidden-layer MLP for binary readmission prediction.
+    """
+    def __init__(self, input_dim):
+        super().__init__()
+        self.net = nn.Sequential(
+            nn.Linear(input_dim, 128),
+            nn.BatchNorm1d(128),
+            nn.ReLU(),
+            nn.Dropout(0.3),
+
+            nn.Linear(128, 64),
+            nn.BatchNorm1d(64),
+            nn.ReLU(),
+            nn.Dropout(0.3),
+
+            nn.Linear(64, 32),
+            nn.BatchNorm1d(32),
+            nn.ReLU(),
+            nn.Dropout(0.2),
+
+            nn.Linear(32, 1),
+        )
+
+    def forward(self, x):
+        return self.net(x).squeeze(1)
 
 # set up output directory for training artifacts to be saved
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -153,8 +179,6 @@ loader = DataLoader(
 )
 
 n = 50
-
-print("\nTraining...")
 for epoch in range(n):
     model.train()
     for Xb, yb in loader:

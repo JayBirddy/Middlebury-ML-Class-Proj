@@ -8,7 +8,6 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import confusion_matrix, roc_auc_score
 from ucimlrepo import fetch_ucirepo
 
-
 # diabetes CCI codes where higher score means sicker patient and weights from Quan et al. (2005)
 CCI_MAP = [
     ('250',  1, 'diabetes'),
@@ -22,7 +21,6 @@ CCI_MAP = [
     ('428',  1, 'heart_failure'),
     ('440',  1, 'peripheral_vascular'),
 ]
-
 
 def compute_cci(row):
     # sum weights across all diagnosis columns and count each condition once
