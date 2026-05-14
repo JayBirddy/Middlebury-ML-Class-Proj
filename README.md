@@ -17,7 +17,7 @@ patients worth the clinical team's time?" respectively and they are in tension w
 # Motivation and Question
 We have public health data for which predictive models would help us give better decisions and resource management tasks.
 
-In the current field of medicine, there are many exterior factors that can play into a patient's discharge. While there isn't much we can do about a patient's cooperation, a hospital's funding, or Insurance-related factors, what we can do is try to implement a system that promotes precautionary and preventive measure for many patients. 
+In the current field of medicine, there are many exterior factors that can play into a patient's discharge. While there isn't much we can do about a patient's cooperation, a hospital's funding, or insurance-related factors, what we can do is try to implement a system that promotes precautionary and preventive measure for many patients. 
 
 # Planned Deliverables
 - Python package containing code for algorithms and analysis as well as documentation.
@@ -32,7 +32,8 @@ Some deliverables are completed and a working model would be built and evaluated
 
 # Resources Required
 -cloud GPU computing power
-- Dataset: Data will be based on MIMIC-III Clinical Database: a deidentified, publicly available database health records dataset based from The Beth Israel Deaconess Medical Center (BIDMC) 
+- Dataset: Data will be based on Diabetes 130-US Hospitals for Years 1999-2008 as the default. Other datasets will be considered as an additive element in parallel with the default dataset if found feasible and in alignment with the project's
+intent of readmission prediction.
 - Libraries: scikit-learn, pandas, numpy, matplotlib, seaborn
 - Literature: Access to prior work on readmission prediction and fairness-aware ML in healthcare via Google Scholar or JSTOR
 

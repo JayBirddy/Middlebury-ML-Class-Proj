@@ -1,0 +1,9 @@
+Critical Discussion
+One thing that should be incorporated into both your proposal and your project writeup is a critical discussion of incentives and impacts in your model.
+
+Incorporate a critical discussion of incentives and impacts in your work.
+
+What is the impact that you would like to have on the world by doing this project? What are the incentives that you have for doing this project?
+If someone were paying you to develop this model, who would be paying and why? Why might someone want this model to be built? Are you comfortable with that?
+Who are the users of your work? Who could be affected by your work? Are these populations the same?
+Are there risks of substantial bias or harm associated with the work you produce?
