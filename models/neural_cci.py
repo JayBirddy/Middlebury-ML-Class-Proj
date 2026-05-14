@@ -14,8 +14,7 @@ from sklearn.calibration import calibration_curve
 import matplotlib.pyplot as plt
 from ucimlrepo import fetch_ucirepo
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'metrics'))
-from fairness_audit import FairnessAuditor
-
+from metrics.fairness_audit import FairnessAuditor
 
 # diabetes CCI codes where higher score means sicker patient and weights from Quan et al. (2005)
 CCI_MAP = [
