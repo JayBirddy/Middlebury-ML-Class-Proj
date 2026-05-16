@@ -255,14 +255,6 @@ if __name__ == '__main__':
     plot_loss(history)
     threshold_sweep(probs, y_test)
 
-    with open(os.path.join(output_dir, "scaler.pkl"), "wb") as f:
-        pickle.dump(scaler, f)
-    print("Saved: scaler.pkl")
-
-    with open(os.path.join(output_dir, "feature_cols.pkl"), "wb") as f:
-        pickle.dump(feature_cols, f)
-    print(f"Saved: feature_cols.pkl  ({len(feature_cols)} features)")
-
     with open(os.path.join(output_dir, "model.pkl"), "wb") as f:
         pickle.dump(model, f)
     print("\nModel saved")
