@@ -93,7 +93,7 @@ class FairnessAuditor:
                 print(f"  {name:<22} {label:<10} gap={gap:.4f}  flagged={flag}")
 
     # plot visual
-    def plot_audit(self, figsize=(16, 12)):
+    def plot_audit(self, figsize=(16, 12), save_path=None):
         labels = [l for l in self.SUBGROUPS if any(
             l in self.results.get(m, {}) for m in self.models
         )]
@@ -140,5 +140,6 @@ class FairnessAuditor:
         fig.suptitle("Fairness Audit — AUROC by Demographic Subgroup",
                      fontsize=13, fontweight="bold")
         plt.tight_layout()
-        plt.savefig(os.path.join(output_dir, "fairness_audit.png"), dpi=150, bbox_inches="tight")
+        save_path = save_path or os.path.join(output_dir, "fairness_audit.png")
+        plt.savefig(save_path, dpi=150, bbox_inches="tight")
         plt.show()
