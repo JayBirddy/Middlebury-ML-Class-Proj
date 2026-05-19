@@ -38,9 +38,6 @@ intent of readmission prediction.
 - Literature: Access to prior work on readmission prediction and fairness-aware ML in healthcare via Google Scholar or JSTOR
 
 
-
-
-
 # What We Will Learn
 - Evan: I hope to deepen my understanding of machine learning for healthcare applications, especially how to develop and evaluate predictive models using real clinical data, and to do so effectively by making sure that the work is done in a collaborative setting with good communication.
 - Jonathan: I would like to have a firsthand experience dealing with data and personal biases. In recent months, I have taken a look at many models that are responsible for making decisions of the life of another human. This being in the same category as those offers an exclusive oppotunity to reflect on addressing patterns with my team. 
@@ -54,7 +51,6 @@ The predictive patterns for 30 day readmissions may be weak or not particularly 
 2. Patients, clinicians, and healthcare systems could benefit through improved care, better resource allocation, and reduced costs.
 3. Underrepresented populations may face less accurate predictions, while some patients may be unnecessarily treated or overlooked due to model errors or bias.
 4. The world will be better if identifying high-risk patients actually leads clinicians to take effective actions that reduce readmissions and if the model is used appropriately without reinforcing existing biases.
-5. 
 
 # Tentative Timeline
 Sprint 1
