@@ -24,23 +24,25 @@ In the current field of medicine, there are many exterior factors that can play 
 - One Jupter notebook for illustrative, walkthrough style purposes
 - An essay discussing ethic implications of our project. May include an ethics matrix and moral/legal discussions
 
-Full success
+Full success:
 Above stated deliverables as well a a trained model that produces clinically meaningful sensitivity and precision on held-out test data. Model performance would be disaggregated across demographic subgroups with no significant disparity.
 
-Partial success
+Partial success:
 Some deliverables are completed and a working model would be built and evaluated even if performance falls short of clinical thresholds. It would include honest documentation of dataset limitations and modeling constraints, forming a foundation for future work.
 
 # Resources Required
--cloud GPU computing power
+- Cloud GPU computing power
 - Dataset: Data will be based on Diabetes 130-US Hospitals for Years 1999-2008 as the default. Other datasets will be considered as an additive element in parallel with the default dataset if found feasible and in alignment with the project's
+- Link to dataset: https://archive.ics.uci.edu/dataset/296/diabetes+130-us+hospitals+for+years+1999-2008
 intent of readmission prediction.
-- Libraries: scikit-learn, pandas, numpy, matplotlib, seaborn
+- Libraries/Packages: scikit-learn, pandas, numpy, matplotlib, seaborn
 - Literature: Access to prior work on readmission prediction and fairness-aware ML in healthcare via Google Scholar or JSTOR
 
 
 # What We Will Learn
 - Evan: I hope to deepen my understanding of machine learning for healthcare applications, especially how to develop and evaluate predictive models using real clinical data, and to do so effectively by making sure that the work is done in a collaborative setting with good communication.
-- Jonathan: I would like to have a firsthand experience dealing with data and personal biases. In recent months, I have taken a look at many models that are responsible for making decisions of the life of another human. This being in the same category as those offers an exclusive oppotunity to reflect on addressing patterns with my team. 
+- Jonathan: I would like to have a firsthand experience dealing with data and personal biases. In recent months, I have taken a look at many models that are responsible for making decisions of the life of another human. This being in the same category as those offers an exclusive oppotunity to reflect on addressing patterns with my team.
+- 
 
 # Risk Statement(s)
 The predictive patterns for 30 day readmissions may be weak or not particularly well captured in the dataset, limiting the model’s ability to achieve meaningful precision and recall for clinical use. Additionally, the complexity of preprocessing clinical data and engineering useful features may require more time and computational resources than anticipated, possibly constraining model development and evaluation.
@@ -66,4 +68,4 @@ Sprint 4
 - Model adjustment, threshold calibration explored for sensitivity/precision tradeoff
 
  Sprint 5 (tentative final presentations)
- - Final write-up, notebook polished, Ethics essay complete, presentation prepared.
+ - Final write-up, notebook polished, presentation prepared.
