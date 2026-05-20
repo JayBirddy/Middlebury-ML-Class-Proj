@@ -76,11 +76,7 @@ def evaluate(model, X_test, y_test, threshold=0.5):
     f1        = f1_score(y_test, preds, zero_division=0)
     auroc     = roc_auc_score(y_test, probs)
 
-    print(f"\n{'='*48}")
-    print(f"  Evaluation (threshold = {threshold})")
-    print(f"{'='*48}")
-    print(f"  Accuracy:             {accuracy:.4f}  "
-          f"(note: inflated by ~89% negative class)")
+    print(f"  Accuracy:             {accuracy:.4f}  ")
     print(f"  Precision (PPV):      {precision:.4f}")
     print(f"  Recall (Sensitivity): {recall:.4f}")
     print(f"  F1-score:             {f1:.4f}")

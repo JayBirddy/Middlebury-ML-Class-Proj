@@ -21,7 +21,7 @@ from sklearn.metrics import (
 )
 
 from src.nn_model_2_layer import TwoLayerNet
-from src.load_data import load_data, split_and_scale
+from src.load_data import load_data_no_cci, split_and_scale
 from metrics.fairness_audit import FairnessAuditor
 
 # output paths
@@ -198,7 +198,7 @@ def threshold_sweep(probs, y_test):
 if __name__ == "__main__":
 
     # load and split
-    X, y, demo = load_data()
+    X, y, demo = load_data_no_cci()
     X_train, X_test, y_train, y_test, scaler, feature_cols, demo_test = \
         split_and_scale(X, y, demo)
 

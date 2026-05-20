@@ -43,6 +43,27 @@ def load_data():
     print(f"Positive class (readmitted <30d): {y.mean()*100:.1f}%")
     return X, y, demo
 
+def load_data_no_cci():
+    """
+    Identical pipeline to load_data() but without CCI feature engineering.
+    """
+    raw = fetch_ucirepo(id=296)
+    X   = raw.data.features.copy()
+    y   = raw.data.targets.copy()
+    y   = (y['readmitted'] == '<30').astype(int).values
+
+    X = replace_question_marks(X)
+    demo = extract_demographics(X)
+    X, y, demo = drop_all_diag_missing(X, y, demo)
+    X, y, demo = drop_invalid_demographics(X, y, demo)
+    X, y, demo = remove_nonreadmit_patients(X, y, demo)
+    X = drop_columns(X)
+    X = impute_and_encode(X)
+
+    print(f"Final dataset: {X.shape[0]} rows, {X.shape[1]} features")
+    print(f"Positive class (readmitted <30d): {y.mean()*100:.1f}%")
+    return X, y, demo
+
 
 def split_and_scale(X, y, demo, test_size=0.2, random_state=42):
     """

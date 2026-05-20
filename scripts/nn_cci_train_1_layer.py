@@ -14,13 +14,13 @@ from sklearn.metrics import (confusion_matrix, roc_auc_score,
                              accuracy_score)
 from sklearn.calibration import calibration_curve
 
-from src.nn_model_2_layer import TwoLayerNet
+from src.nn_model_1_layer import OneLayerNet
 from src.load_data import load_data, split_and_scale
 from metrics.fairness_audit import FairnessAuditor
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-output_dir   = os.path.join(PROJECT_ROOT, "outputs", "nn_cci")
-graph_dir    = os.path.join(PROJECT_ROOT, "graphs",  "nn_cci")
+output_dir   = os.path.join(PROJECT_ROOT, "outputs", "nn_cci_1_layer")
+graph_dir    = os.path.join(PROJECT_ROOT, "graphs",  "nn_cci_1_layer")
 os.makedirs(output_dir, exist_ok=True)
 os.makedirs(graph_dir,  exist_ok=True)
 
@@ -159,7 +159,7 @@ if __name__ == '__main__':
     loader  = make_data_loader(X_tr_t, y_tr_t)
 
     pos_weight = (y_train == 0).sum() / (y_train == 1).sum()
-    model      = TwoLayerNet(input_dim=X_tr_t.shape[1])
+    model      = OneLayerNet(input_dim=X_tr_t.shape[1])
 
     print("\nTraining...")
     history = train(model, loader, pos_weight, k_epochs=30, lr=1e-3)
