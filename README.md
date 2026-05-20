@@ -24,17 +24,18 @@ In the current field of medicine, there are many exterior factors that can play 
 - One Jupter notebook for illustrative, walkthrough style purposes
 - An essay discussing ethic implications of our project. May include an ethics matrix and moral/legal discussions
 
-Full success
+Full success:
 Above stated deliverables as well a a trained model that produces clinically meaningful sensitivity and precision on held-out test data. Model performance would be disaggregated across demographic subgroups with no significant disparity.
 
-Partial success
+Partial success:
 Some deliverables are completed and a working model would be built and evaluated even if performance falls short of clinical thresholds. It would include honest documentation of dataset limitations and modeling constraints, forming a foundation for future work.
 
 # Resources Required
--cloud GPU computing power
+- Cloud GPU computing power
 - Dataset: Data will be based on Diabetes 130-US Hospitals for Years 1999-2008 as the default. Other datasets will be considered as an additive element in parallel with the default dataset if found feasible and in alignment with the project's
+- Link to dataset: https://archive.ics.uci.edu/dataset/296/diabetes+130-us+hospitals+for+years+1999-2008
 intent of readmission prediction.
-- Libraries: scikit-learn, pandas, numpy, matplotlib, seaborn
+- Libraries/Packages: scikit-learn, pandas, numpy, matplotlib, seaborn
 - Literature: Access to prior work on readmission prediction and fairness-aware ML in healthcare via Google Scholar or JSTOR
 
 
@@ -67,4 +68,4 @@ Sprint 4
 - Model adjustment, threshold calibration explored for sensitivity/precision tradeoff
 
  Sprint 5 (tentative final presentations)
- - Final write-up, notebook polished, Ethics essay complete, presentation prepared.
+ - Final write-up, notebook polished, presentation prepared.
