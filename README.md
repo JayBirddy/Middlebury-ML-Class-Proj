@@ -41,6 +41,7 @@ intent of readmission prediction.
 # What We Will Learn
 - Evan: I hope to deepen my understanding of machine learning for healthcare applications, especially how to develop and evaluate predictive models using real clinical data, and to do so effectively by making sure that the work is done in a collaborative setting with good communication.
 - Jonathan: I would like to have a firsthand experience dealing with data and personal biases. In recent months, I have taken a look at many models that are responsible for making decisions of the life of another human. This being in the same category as those offers an exclusive oppotunity to reflect on addressing patterns with my team. 
+- Jayden: I want to expand on critical application of machine learning and extending off of critical thinking in data science more broadly. This is good avenue for that intersection as the problem is also more relevant to my life as having to deal with people in my close proximity effected by this sort of problem.
 
 # Risk Statement(s)
 The predictive patterns for 30 day readmissions may be weak or not particularly well captured in the dataset, limiting the model’s ability to achieve meaningful precision and recall for clinical use. Additionally, the complexity of preprocessing clinical data and engineering useful features may require more time and computational resources than anticipated, possibly constraining model development and evaluation.
